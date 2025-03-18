@@ -177,25 +177,31 @@
             if (studentResult) {
                 let studentName = studentResult["Name"] || "Unknown";
                 let studentRank = studentResult["Rank"] || "N/A";
-                let resultStatus = studentResult["Result"] ? studentResult["Result"].toLowerCase() : "fail";
-                let isPass = resultStatus === "pass";
+                let resultStatus = studentResult["Result"] ? studentResult["Result"].toLowerCase() : "fail"; // Fetch result status
+let isPass = resultStatus === "pass"; // Determine pass or fail based on "Result" column
 
-                let resultText = `<h3>Admission No: ${studentResult["Admission No"]}</h3>`;
-                resultText += `<h3>Student Name: ${studentName}</h3>`;
-                resultText += `<h3>Rank: ${studentRank}</h3>`;
+let resultText = `<h3>Admission No: ${studentResult["Admission No"]}</h3>`;
+resultText += `<h3>Student Name: ${studentName}</h3>`;
+resultText += `<h3>Rank: ${studentRank}</h3>`;
 
-                resultText += `<table><tr><th>Subject</th><th>Marks</th></tr>`;
-                Object.keys(studentResult).forEach(key => {
-                    if (!isNaN(studentResult[key]) && key.toLowerCase() !== "admission no" && key.toLowerCase() !== "rank") {
-                        let mark = studentResult[key] < 18 ? `<span class="fail">${studentResult[key]}</span>` : studentResult[key];
-                        resultText += `<tr><td>${key}</td><td>${mark}</td></tr>`;
-                    }
-                });
-                resultText += `</table>`;
-                resultText += `<h3 class="${isPass ? 'pass' : 'fail'}">${isPass ? 'Pass' : 'Fail'}</h3>`;
+resultText += `<table><tr><th>Subject</th><th>Marks</th></tr>`;
 
-                if (isPass) resultText += `<h3 class="hidden-print" style="color: green;">🎉 Congratulations, ${studentName}! You have passed the exam 🎉</h3>`;
-                else resultText += `<h3 class="hidden-print" style="color: red;">❤️ Don't Give Up, ${studentName}! Keep Trying, Inshallah You Will Succeed! ❤️</h3>`;
+Object.keys(studentResult).forEach(key => {
+    if (!isNaN(studentResult[key]) && key.toLowerCase() !== "admission no" && key.toLowerCase() !== "rank" && key.toLowerCase() !== "attendance") {
+        let mark = studentResult[key] < 18 ? `<span class="fail">${studentResult[key]}</span>` : studentResult[key];
+        resultText += `<tr><td>${key}</td><td>${mark}</td></tr>`;
+    }
+});
+
+resultText += `</table>`;
+resultText += `<h3 class="${isPass ? 'pass' : 'fail'}">${isPass ? 'Pass' : 'Fail'}</h3>`;
+
+// Display congratulations or encouragement messages
+if (isPass) {
+    resultText += `<h3 class="hidden-print" style="color: green;">🎉 Congratulations, ${studentName}! May Allah Bless You 🎉</h3>`;
+} else {
+    resultText += `<h3 class="hidden-print" style="color: red;">❤️ Don't Give Up, ${studentName}! Keep Trying! Inshallah ❤️</h3>`;
+}
 
                 resultContainer.innerHTML = resultText;
                 resultContainer.style.display = "block";
