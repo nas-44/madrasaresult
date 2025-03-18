@@ -1,6 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Header Section -->
+<header>
+    <h1>ഹയാതുൽ ഇസ്‌ലാം മദ്രസ  പൊട്ടിപ്പാറ</h1>
+    <div id="adminHelpButton">
+        <a href="https://wa.me/+9197785 66093" target="_blank"> Any Help</a>
+    </div>
+</header>
+
+<style>
+    /* Basic Header Styling */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #333; /* Dark background */
+        color: white;
+        padding: 15px 20px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 18px;
+        color: white;
+        
+    }
+
+    /* Help Button Styling */
+    #adminHelpButton {
+        background: #007bff; /* Blue color */
+        color: white;
+        padding: 8px 12px;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #adminHelpButton a {
+        text-decoration: none;
+        color: white;
+    }
+
+    #adminHelpButton:hover {
+        background: #0056b3; /* Darker blue on hover */
+    }
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Results Portal</title>
@@ -89,15 +137,13 @@
             .hidden-print {
                 display: none;
             }
-        }
-    </style>
+     
+</style>
+
 </head>
 <body>
-
-    <div class="container">
-        <h1>ഹയാതുൽ ഇസ്‌ലാം മദ്രസ (2323)</h1>
-        <h2>പൊട്ടിപ്പാറ</h2>
-        <h2>Student Exam Results</h2>
+        <div class="container">
+        <h1>Student Exam Results</h1>
 
         <label for="classSelect">Select Class:</label>
         <select id="classSelect">
@@ -112,7 +158,7 @@
         </select>
 
         <input type="text" id="searchBox" placeholder="Enter Admission No">
-        <button onclick="fetchResults()">View Result</button>
+        <button onclick="fetchResults()">Get Result</button>
 
         <div id="result-container"></div>
 
@@ -120,6 +166,7 @@
             <button onclick="printResult()" class="print-btn hidden-print" style="display: none;">Print Result</button>
             <button onclick="captureScreenshot()" class="screenshot-btn hidden-print" style="display: none;">Take a Screenshot</button>
         </div>
+        
     </div>
 
     <script>
@@ -200,7 +247,7 @@ resultText += `<h3 class="${isPass ? 'pass' : 'fail'}">${isPass ? 'Pass' : 'Fail
 if (isPass) {
     resultText += `<h3 class="hidden-print" style="color: green;">🎉 Congratulations, ${studentName}! May Allah Bless You 🎉</h3>`;
 } else {
-    resultText += `<h3 class="hidden-print" style="color: red;">❤️ Don't Give Up, ${studentName}! Keep Trying! Inshallah ❤️</h3>`;
+    resultText += `<h3 class="hidden-print" style="color: red;">❤️ Don't Give Up, ${studentName}! Keep Trying! Inshallah You Will Succeed ❤️</h3>`;
 }
 
                 resultContainer.innerHTML = resultText;
@@ -252,6 +299,42 @@ if (isPass) {
                 link.click();
             });
         }
+        
+        window.onload = function() {
+    // Create watermark container (footer-style)
+    let watermarkContainer = document.createElement("div");
+    watermarkContainer.style.width = "100%";
+    watermarkContainer.style.textAlign = "center";
+    watermarkContainer.style.padding = "10px 0"; // Adds space inside
+    watermarkContainer.style.position = "fixed"; // Sticks to bottom
+    watermarkContainer.style.bottom = "0"; // Deepest bottom
+    watermarkContainer.style.left = "0"; // Stretches across the screen
+    watermarkContainer.style.background = "#f9f9f9"; // Light background
+    watermarkContainer.style.zIndex = "9999"; // Ensures it's always on top
+    watermarkContainer.style.boxShadow = "0 -2px 5px rgba(0, 0, 0, 0.1)"; // Soft shadow
+
+    // Create watermark link
+    let watermark = document.createElement("a");
+    watermark.innerText = "Click here for Contact Developer";
+    watermark.href = "https://wa.me/9072987595"; // Replace with your WhatsApp link
+    watermark.target = "_blank"; // Opens in a new tab
+
+    // Styling the watermark
+    watermark.style.fontSize = "14px";
+    watermark.style.color = "rgba(0, 0, 0, 0.60)"; // 60% transparency
+    watermark.style.pointerEvents = "auto"; // Allows interaction
+    watermark.style.textDecoration = "none"; // Removes underline
+    watermark.style.display = "inline-block"; // Proper centering
+
+    // Append watermark inside container
+    watermarkContainer.appendChild(watermark);
+
+    // Ensure it is appended only once
+    if (!document.getElementById("watermarkFooter")) {
+        watermarkContainer.id = "watermarkFooter"; // Unique ID to prevent duplicates
+        document.body.appendChild(watermarkContainer);
+    }
+};
     </script>
 
 </body>
